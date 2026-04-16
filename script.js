@@ -1,5 +1,5 @@
-// ↓↓↓ 務必換成妳最新「建立新版本」後拿到的 GAS 網址 ↓↓↓
-const GOOGLE_API_URL = "妳的新_GAS_網址貼在這裡";
+// ↓↓↓ 維持妳最新部署的 GAS 網址 ↓↓↓
+const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbws8wpjoRZ2a4rttnmRLP5z49tSEHACjc4_h3RVo2xKS3QDAy1liG3JrUmJwwcvNe9h/exec";
 
 let TARGET_SHEET = "個人記帳"; 
 let PAGE_MODE = "PERSONAL";
@@ -26,12 +26,21 @@ async function fetchDashboard() {
         const res = await fetch(`${GOOGLE_API_URL}?action=getDashboard&targetSheet=${encodeURIComponent(TARGET_SHEET)}`);
         const data = await res.json();
         systemBalances = data.accounts; 
-        document.getElementById('krwRateInput').value = data.krwRate || 40;
+        
+        const krwRate = data.krwRate || 40;
+        document.getElementById('krwRateInput').value = krwRate;
+        
         document.getElementById('dash-netcash').innerText = `$${data.netCash}`;
         document.getElementById('dash-assets').innerText = `$${data.totalAsset}`;
         document.getElementById('dash-debt').innerText = `$${data.debt}`;
         document.getElementById('dash-income').innerText = `$${data.monthIncome}`;
         document.getElementById('dash-expense').innerText = `$${data.monthExpense}`;
+        
+        // 處理獨立的韓幣顯示
+        const krwBalance = data.accounts['批發網點數'] || 0;
+        document.getElementById('dash-krw').innerText = `₩${krwBalance}`;
+        document.getElementById('dash-krw-twd').innerText = `$${Math.round(krwBalance / krwRate)}`;
+
         calculateDiff();
     } catch (e) { document.getElementById('dash-netcash').innerText = '連線中...'; }
 }
@@ -54,7 +63,6 @@ async function updateWaterBalance() {
     const amt = document.getElementById('quickAmount').value;
     if (!amt) return;
 
-    // 【新增】前端防呆：如果選到批發網，不給校正，直接跳警告
     if (acc === '批發網點數') {
         document.getElementById('quick-msg').innerText = "❌ 批發網餘額是系統自動算的，不用手動校正啦！";
         return;
