@@ -1,208 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
-
-body { 
-    /* 圓潤字體加上微軟正黑體備用 */
-    font-family: 'Nunito', "微軟正黑體", sans-serif; 
-    background-color: #FDFBF7; /* 燕麥奶底色 */
-    color: #6B6054; /* 溫暖的深棕灰色 */
-    max-width: 480px; 
-    margin: 0 auto; 
-    padding: 20px; 
-}
-
-.container { 
-    background: #FFFFFF; 
-    padding: 30px 25px; 
-    border-radius: 24px; /* 圓潤感加大 */
-    box-shadow: 0 10px 40px rgba(168, 153, 138, 0.08); /* 奶油般的輕柔陰影 */
-}
-
-h2 { 
-    text-align: center; 
-    color: #8C7A6B; 
-    margin-top: 0; 
-    margin-bottom: 20px; 
-    font-weight: 700; 
-    letter-spacing: 1.5px; 
-}
-
-/* --- 主控台切換區 --- */
-.main-tabs { 
-    display: flex; 
-    margin-bottom: 25px; 
-    background: #F5F1EB; /* 淺卡其背景 */
-    border-radius: 16px; 
-    padding: 5px; 
-}
-.main-tab { 
-    flex: 1; 
-    text-align: center; 
-    padding: 12px; 
-    cursor: pointer; 
-    font-weight: 700; 
-    color: #A69B8F; 
-    transition: 0.3s; 
-    font-size: 15px; 
-    border-radius: 12px;
-}
-.main-tab.active { 
-    background: #FFFFFF; 
-    color: #8C7A6B; 
-    box-shadow: 0 4px 12px rgba(168, 153, 138, 0.1); 
-}
-
-/* --- 財務底氣看板 --- */
-.dashboard-card { 
-    background: linear-gradient(135deg, #D4C4B7 0%, #BAA694 100%); /* 奶茶色漸層 */
-    color: #FFF; 
-    padding: 25px 20px; 
-    border-radius: 20px; 
-    margin-bottom: 25px; 
-    text-align: center; 
-    box-shadow: 0 8px 24px rgba(186, 166, 148, 0.25); 
-}
-.dash-title { font-size: 13px; opacity: 0.9; margin-bottom: 8px; font-weight: 600; letter-spacing: 1px;}
-.dash-main { font-size: 36px; font-weight: 700; margin-bottom: 18px; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.dash-sub { 
-    display: flex; 
-    justify-content: space-between; 
-    background: rgba(255,255,255,0.15); 
-    padding: 12px; 
-    border-radius: 14px; 
-    font-size: 13px; 
-}
+body { font-family: "微軟正黑體", sans-serif; background-color: #FDFBF7; color: #6B6054; max-width: 480px; margin: 0 auto; padding: 20px; }
+.container { background: #FFFFFF; padding: 25px; border-radius: 24px; box-shadow: 0 10px 40px rgba(168, 153, 138, 0.08); }
+h2 { text-align: center; color: #8C7A6B; margin-bottom: 20px; font-weight: 700; }
+.main-tabs { display: flex; background: #F5F1EB; border-radius: 16px; padding: 5px; margin-bottom: 20px; }
+.main-tab { flex: 1; text-align: center; padding: 10px; cursor: pointer; font-weight: 700; color: #A69B8F; border-radius: 12px; }
+.main-tab.active { background: #FFFFFF; color: #8C7A6B; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.dashboard-card { background: linear-gradient(135deg, #D4C4B7 0%, #BAA694 100%); color: #FFF; padding: 20px; border-radius: 20px; text-align: center; margin-bottom: 20px; }
+.dash-main { font-size: 32px; font-weight: 700; margin: 10px 0; }
+.dash-sub { display: flex; background: rgba(255,255,255,0.15); padding: 10px; border-radius: 12px; font-size: 13px; }
 .dash-sub div { flex: 1; }
-.dash-num { 
-    font-size: 15px; 
-    font-weight: 700; 
-    margin-top: 6px; 
-    display: inline-block; 
-    background: #FFFFFF; 
-    color: #6B6054; 
-    padding: 4px 12px; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-/* 看板內特定的收支字體顏色 override */
-#dash-income { color: #8FA684 !important; } /* 抹茶綠 */
-#dash-expense { color: #D99C9C !important; } /* 玫瑰豆沙粉 */
-#dash-debt { color: #D99C9C !important; }
-
-/* --- 快速對帳區 --- */
-.quick-balance-box { 
-    background: #FCFAF8; 
-    padding: 18px; 
-    border-radius: 16px; 
-    border: 2px dashed #EBE4DB; 
-    margin-bottom: 10px; 
-}
-.btn-secondary { 
-    width: 100%; 
-    margin-top: 12px; 
-    padding: 14px; 
-    background-color: #EFEBE4; 
-    color: #8C7A6B; 
-    border: none; 
-    border-radius: 14px; 
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: 0.2s; 
-    font-size: 15px;
-}
-.btn-secondary:hover { background-color: #E4DED5; }
-
-/* --- 表單共用樣式 (微胖可愛風) --- */
-.form-group { margin-bottom: 20px; }
-label { 
-    display: block; 
-    font-size: 14px; 
-    font-weight: 700; 
-    margin-bottom: 8px; 
-    color: #9E9082; 
-    padding-left: 4px;
-}
-input, select { 
-    width: 100%; 
-    height: 52px; 
-    padding: 0 16px; 
-    box-sizing: border-box; 
-    border: 2px solid transparent; 
-    border-radius: 14px; 
-    font-size: 15px; 
-    background-color: #F5F1EB; /* 奶油淺底 */
-    color: #6B6054; 
-    outline: none; 
-    font-family: inherit; 
-    transition: 0.3s; 
-    font-weight: 600;
-}
-input:focus, select:focus { 
-    background-color: #FFFFFF; 
-    border-color: #D4C4B7; 
-    box-shadow: 0 0 0 4px rgba(212, 196, 183, 0.2); 
-}
-
-/* --- 收支切換大按鈕 --- */
-.radio-group { display: flex; gap: 12px; margin-bottom: 25px; }
-.radio-btn { 
-    flex: 1; 
-    text-align: center; 
-    padding: 16px; 
-    border-radius: 16px; 
-    background: #F5F1EB; 
-    border: 2px solid transparent; 
-    cursor: pointer; 
-    font-weight: 700; 
-    transition: 0.3s; 
-    color: #A69B8F; 
-    box-sizing: border-box; 
-    font-size: 16px;
-}
-.radio-btn.active-expense { 
-    background-color: #D99C9C; 
-    color: white; 
-    box-shadow: 0 6px 16px rgba(217, 156, 156, 0.35); 
-}
-.radio-btn.active-income { 
-    background-color: #A3B899; 
-    color: white; 
-    box-shadow: 0 6px 16px rgba(163, 184, 153, 0.35); 
-}
-
-/* --- 提交大按鈕 --- */
-button[type="submit"] { 
-    width: 100%; 
-    margin-top: 15px; 
-    padding: 18px; 
-    background-color: #BAA694; 
-    color: white; 
-    border: none; 
-    border-radius: 16px; 
-    font-size: 18px; 
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: 0.3s; 
-    box-shadow: 0 8px 20px rgba(186, 166, 148, 0.3);
-    letter-spacing: 2px;
-}
-button[type="submit"]:hover { 
-    background-color: #A8927F; 
-    transform: translateY(-2px); 
-}
-button[type="submit"]:active { 
-    transform: translateY(0); 
-}
-
-#loading { text-align: center; font-size: 14px; color: #8C847D; display: none; margin: 15px 0; font-weight: bold;}
-
-/* --- 強制覆寫 HTML 內建的物流/運費特殊區塊樣式，讓它融入奶油風 --- */
-#logisticsGroup { background: #FAF5F0 !important; border: 2px dashed #EBE4DB !important; border-radius: 14px !important; padding: 15px !important; }
-#logisticsGroup label { color: #A8927F !important; }
-
-#esFields > div { background: #FAF5F0 !important; border: 2px dashed #EBE4DB !important; border-radius: 14px !important; padding: 15px !important; margin-bottom: 12px; }
-#esFields label { color: #A8927F !important; }
-
-#payuniAutoFields { background: #FAF5F0 !important; border: 2px dashed #EBE4DB !important; border-radius: 14px !important; padding: 15px !important; }
-#payuniAutoFields label { color: #A8927F !important; }
-#payuniAutoFields p { color: #C2A892 !important; font-weight: 600;}
+.dash-num { background: #FFF; color: #6B6054; padding: 2px 8px; border-radius: 6px; font-weight: 700; margin-top: 4px; display: inline-block; }
+.quick-balance-box { background: #FCFAF8; padding: 15px; border-radius: 16px; border: 2px dashed #EBE4DB; }
+.btn-secondary { width: 100%; margin-top: 10px; padding: 12px; background: #EFEBE4; color: #8C7A6B; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
+.form-group { margin-bottom: 15px; }
+label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 5px; color: #9E9082; }
+input, select { width: 100%; height: 48px; padding: 0 12px; border-radius: 12px; border: none; background: #F5F1EB; color: #6B6054; font-size: 15px; outline: none; box-sizing: border-box; }
+.radio-group { display: flex; gap: 10px; margin-bottom: 20px; }
+.radio-btn { flex: 1; text-align: center; padding: 14px; border-radius: 14px; background: #F5F1EB; color: #A69B8F; font-weight: 700; cursor: pointer; }
+.radio-btn.active-expense { background: #D99C9C; color: #FFF; }
+.radio-btn.active-income { background: #A3B899; color: #FFF; }
+button[type="submit"] { width: 100%; padding: 16px; background: #BAA694; color: #FFF; border: none; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+#logisticsGroup, #esFields div, #payuniAutoFields { background: #FAF5F0; border: 2px dashed #EBE4DB; border-radius: 12px; padding: 12px; margin-top: 10px; }
