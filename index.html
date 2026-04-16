@@ -9,37 +9,64 @@
 <body>
 <div class="container">
     <h2 id="page-title">☘️阿霓記帳總部</h2>
+    
     <div class="main-tabs">
         <div class="main-tab active" id="mode-personal" onclick="setLedgerMode('PERSONAL', '個人記帳')">☘️個人</div>
         <div class="main-tab" id="mode-group" onclick="setLedgerMode('GROUP', '團購記帳')">📦團購</div>
         <div class="main-tab" id="mode-dessert" onclick="setLedgerMode('DESSERT', '甜點記帳')">🧁甜點</div>
     </div>
+    
     <div class="dashboard-card">
-        <div class="dash-title">✨ 目前可用淨現金</div>
+        <div class="dash-title">✨ 目前可用淨現金 (台幣底氣)</div>
         <div class="dash-main" id="dash-netcash">讀取中...</div>
+        
         <div class="dash-sub" style="margin-bottom: 8px;">
-            <div><span>總資產</span><br><span id="dash-assets" class="dash-num">--</span></div>
+            <div><span>總資產(台幣)</span><br><span id="dash-assets" class="dash-num">--</span></div>
             <div><span>待付貨款</span><br><span id="dash-debt" class="dash-num" style="color:#D99C9C;">--</span></div>
         </div>
+        
+        <div class="dash-sub" style="margin-bottom: 8px; background: rgba(255,255,255,0.25);">
+            <div><span>🇰🇷 批發網 (KRW)</span><br><span id="dash-krw" class="dash-num" style="color:#A69B8F;">--</span></div>
+            <div><span>折合台幣約</span><br><span id="dash-krw-twd" class="dash-num" style="color:#A69B8F;">--</span></div>
+        </div>
+
         <div class="dash-sub">
             <div><span id="dash-income-label">本月收入</span><br><span id="dash-income" class="dash-num" style="color:#A3B899;">--</span></div>
             <div><span id="dash-expense-label">本月支出</span><br><span id="dash-expense" class="dash-num" style="color:#D99C9C;">--</span></div>
         </div>
     </div>
+
     <div class="quick-balance-box">
-        <label>💳 抓帳比對與餘額校正</label>
+        <label>💳 抓帳比對與系統校正</label>
         <div style="display:flex; gap:10px; margin-top:5px;">
-            <select id="quickAccount" style="flex:1;"><option value="台新銀行">台新銀行</option><option value="中國信託">中國信託</option><option value="LINE Bank">LINE Bank</option><option value="LINE Pay Money">LINE Pay Money</option><option value="iPASS Money">iPASS Money</option><option value="其他/現金">其他/現金</option></select>
+            <select id="quickAccount" style="flex:1.2;">
+                <option value="台新銀行">台新銀行</option>
+                <option value="中國信託">中國信託</option>
+                <option value="LINE Bank">LINE Bank</option>
+                <option value="LINE Pay Money">LINE Pay Money</option>
+                <option value="iPASS Money">iPASS Money</option>
+                <option value="其他/現金">其他/現金</option>
+                <option value="批發網點數">批發網點數(KRW)</option>
+            </select>
             <input type="number" id="quickAmount" placeholder="實際餘額" style="flex:1; margin:0;">
         </div>
         <button type="button" class="btn-secondary" onclick="updateWaterBalance()">校正系統餘額</button>
+        
+        <div style="display:flex; gap:10px; margin-top:15px; border-top: 1px dashed #EBE4DB; padding-top: 15px;">
+            <span style="flex:1.2; font-size:14px; color:#9E9082; font-weight:700; line-height:48px; padding-left:4px;">🇰🇷 韓幣現行匯率</span>
+            <input type="number" step="0.1" id="krwRateInput" placeholder="例:40" style="flex:1; margin:0;">
+            <button type="button" class="btn-secondary" style="flex:1; margin:0; padding:0;" onclick="updateRate()">更新匯率</button>
+        </div>
         <div id="quick-msg" style="font-size:12px; text-align:center; margin-top:10px; min-height: 18px;"></div>
     </div>
+    
     <hr style="border: 0; border-top: 2px dashed #F5F1EB; margin: 25px 0;">
+    
     <div class="radio-group">
         <div class="radio-btn active-expense" id="btn-expense" onclick="setType('支出')">支出</div>
         <div class="radio-btn" id="btn-income" onclick="setType('收入')">收入</div>
     </div>
+    
     <form id="form">
         <div class="form-group"><label>日期</label><input type="date" id="date" required></div>
         <div class="form-group"><label>類型</label><select id="subType" onchange="updateCategories()"></select></div>
