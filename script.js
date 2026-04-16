@@ -1,5 +1,5 @@
 // ↓↓↓ 第一件事：把網址換成妳的！ ↓↓↓
-const GOOGLE_API_URL = "妳的新_GAS_網址貼在這裡";
+const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbws8wpjoRZ2a4rttnmRLP5z49tSEHACjc4_h3RVo2xKS3QDAy1liG3JrUmJwwcvNe9h/exec";
 
 let TARGET_SHEET = "個人記帳"; 
 let PAGE_MODE = "PERSONAL";
