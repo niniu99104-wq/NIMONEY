@@ -25,7 +25,7 @@
             <div><span>待付貨款</span><br><span id="dash-debt" class="dash-num" style="color:#D99C9C;">--</span></div>
         </div>
         
-        <div class="dash-sub" style="margin-bottom: 8px; background: rgba(255,255,255,0.25);">
+        <div class="dash-sub" id="krw-dashboard-section" style="margin-bottom: 8px; background: rgba(255,255,255,0.25); display: none;">
             <div><span>🇰🇷 批發網 (KRW)</span><br><span id="dash-krw" class="dash-num" style="color:#A69B8F;">--</span></div>
             <div><span>折合台幣約</span><br><span id="dash-krw-twd" class="dash-num" style="color:#A69B8F;">--</span></div>
         </div>
@@ -46,13 +46,13 @@
                 <option value="LINE Pay Money">LINE Pay Money</option>
                 <option value="iPASS Money">iPASS Money</option>
                 <option value="其他/現金">其他/現金</option>
-                <option value="批發網點數">批發網點數(KRW)</option>
+                <option id="opt-krw" value="批發網點數" style="display:none;">批發網點數(KRW)</option>
             </select>
             <input type="number" id="quickAmount" placeholder="實際餘額" style="flex:1; margin:0;">
         </div>
         <button type="button" class="btn-secondary" onclick="updateWaterBalance()">校正系統餘額</button>
         
-        <div style="display:flex; gap:10px; margin-top:15px; border-top: 1px dashed #EBE4DB; padding-top: 15px;">
+        <div id="krw-rate-box" style="display:none; gap:10px; margin-top:15px; border-top: 1px dashed #EBE4DB; padding-top: 15px;">
             <span style="flex:1.2; font-size:14px; color:#9E9082; font-weight:700; line-height:48px; padding-left:4px;">🇰🇷 韓幣現行匯率</span>
             <input type="number" step="0.1" id="krwRateInput" placeholder="例:40" style="flex:1; margin:0;">
             <button type="button" class="btn-secondary" style="flex:1; margin:0; padding:0;" onclick="updateRate()">更新匯率</button>
