@@ -1,4 +1,4 @@
-// ↓↓↓ 維持妳最新部署的 GAS 網址 ↓↓↓
+// ↓↓↓ 務必換成妳最新部署的 GAS 網址 ↓↓↓
 const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbws8wpjoRZ2a4rttnmRLP5z49tSEHACjc4_h3RVo2xKS3QDAy1liG3JrUmJwwcvNe9h/exec";
 
 let TARGET_SHEET = "個人記帳"; 
@@ -16,8 +16,16 @@ function setLedgerMode(mode, sheet) {
     PAGE_MODE = mode; TARGET_SHEET = sheet;
     document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
     if (document.getElementById(`mode-${mode.toLowerCase()}`)) document.getElementById(`mode-${mode.toLowerCase()}`).classList.add('active');
+    
     document.getElementById('dash-income-label').innerText = `本月${sheet.replace('記帳','')}收入`;
     document.getElementById('dash-expense-label').innerText = `本月${sheet.replace('記帳','')}支出`;
+    
+    // 嚴格控制韓幣區塊顯示：只有團購模式會切換成 flex/block，其他模式一律 none 隱藏
+    const isGroup = (mode === 'GROUP');
+    document.getElementById('krw-dashboard-section').style.display = isGroup ? 'flex' : 'none';
+    document.getElementById('krw-rate-box').style.display = isGroup ? 'flex' : 'none';
+    document.getElementById('opt-krw').style.display = isGroup ? 'block' : 'none';
+
     setType('支出'); fetchDashboard(); 
 }
 
@@ -36,7 +44,6 @@ async function fetchDashboard() {
         document.getElementById('dash-income').innerText = `$${data.monthIncome}`;
         document.getElementById('dash-expense').innerText = `$${data.monthExpense}`;
         
-        // 處理獨立的韓幣顯示
         const krwBalance = data.accounts['批發網點數'] || 0;
         document.getElementById('dash-krw').innerText = `₩${krwBalance}`;
         document.getElementById('dash-krw-twd').innerText = `$${Math.round(krwBalance / krwRate)}`;
@@ -62,12 +69,10 @@ async function updateWaterBalance() {
     const acc = document.getElementById('quickAccount').value;
     const amt = document.getElementById('quickAmount').value;
     if (!amt) return;
-
     if (acc === '批發網點數') {
-        document.getElementById('quick-msg').innerText = "❌ 批發網餘額是系統自動算的，不用手動校正啦！";
+        document.getElementById('quick-msg').innerText = "❌ 批發網由系統自動計算，不開放手動校正！";
         return;
     }
-
     document.getElementById('quick-msg').innerText = "校正同步中...";
     try {
         await fetch(`${GOOGLE_API_URL}?action=updateBalance&accountName=${encodeURIComponent(acc)}&amount=${amt}`);
@@ -110,7 +115,6 @@ function updateAccounts() {
     if (cat === 'PAYUNi 入帳') list = ['銀行轉帳 (中國信託)', '銀行轉帳 (台新銀行)'];
     else if (cat === 'EasyStore 訂單') list = ['Line Pay', '藍新待撥款', '銀行轉帳 (台新銀行)'];
     else if (sub === '批發網(韓幣)') list = ['批發網點數'];
-    
     if (currentType === '收入' || sub.includes('代理')) list = list.filter(i => i !== '信用卡');
     list.sort((a, b) => a.length - b.length);
     document.getElementById('account').innerHTML = list.map(a => `<option value="${a}">${a}</option>`).join('');
@@ -158,5 +162,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('date').valueAsDate = new Date();
     document.getElementById('quickAmount').addEventListener('input', calculateDiff);
     document.getElementById('quickAccount').addEventListener('change', calculateDiff);
-    setLedgerMode('PERSONAL', '個人記帳');
+    // 預設切換到個人頁面，韓幣區塊一開始就會藏好
+    setLedgerMode('PERSONAL', '個人記帳'); 
 });
